@@ -1,10 +1,11 @@
-import { ContactPage } from '@/components/shared/Contact/Contact';
+
+import ContactSection from '@/components/shared/Contact/ContactSection';
 import React from 'react';
 
 const ContactApp = () => {
     return (
         <div>
-            <ContactPage />
+            <ContactSection />
         </div>
     );
 };

@@ -1,106 +1,114 @@
-import Link from "next/link"
-import { Button } from "../../ui/button"
-import { Input } from "../../ui/input"
-import { Separator } from "../../ui/separator"
-import { 
-  Twitter, 
-  Github, 
-  Linkedin, 
-  MessageCircle,
-  Mail
-} from "lucide-react"
-import Container from "../Container/Container"
+import Link from "next/link";
+import { ArrowUpRight, Github, Linkedin, ArrowUp } from "lucide-react";
+import Container from "../Container/Container";
+import { site } from "@/lib/site";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/project" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export function SiteFooter() {
   return (
-    <footer className="w-full border-t bg-background">
+    <footer className="relative overflow-hidden border-t border-paper/10 bg-ink text-paper">
       <Container>
-      <div className=" py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">My Protfolio</h3>
-            <p className="text-sm text-muted-foreground">
-              Building the future, one component at a time.
-            </p>
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="icon">
-                <Twitter className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Github className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <MessageCircle className="h-4 w-4" />
-              </Button>
+        <div className="py-14 sm:py-16">
+          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-xl">
+              <p className="text-[11px] uppercase tracking-[0.32em] text-gold">
+                Available for work
+              </p>
+              <p className="mt-4 font-serif text-4xl leading-tight tracking-tight sm:text-5xl">
+                Let us make something
+                <span className="italic text-gold"> lasting.</span>
+              </p>
+            </div>
+
+            <Link
+              href="/#contact"
+              className="group inline-flex items-center gap-3 border border-gold bg-gold px-6 py-3 text-[12px] font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-paper"
+            >
+              Start a conversation
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+          </div>
+
+          <div className="mt-14 grid gap-10 border-t border-paper/10 pt-10 md:grid-cols-3">
+            <div>
+              <Link href="/" className="font-serif text-2xl tracking-tight">
+                {site.name}
+              </Link>
+              <p className="mt-3 max-w-xs text-sm leading-6 text-paper/45">
+                {site.role} crafting considered web products from {site.location}.
+              </p>
+              <div className="mt-5 flex items-center gap-3">
+                <a
+                  href={site.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="flex h-9 w-9 items-center justify-center border border-paper/15 text-paper/55 transition-colors hover:border-gold/50 hover:text-gold"
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+                <a
+                  href={site.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  className="flex h-9 w-9 items-center justify-center border border-paper/15 text-paper/55 transition-colors hover:border-gold/50 hover:text-gold"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-paper/35">
+                Index
+              </p>
+              <nav className="flex flex-col gap-3">
+                {links.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm text-paper/55 transition-colors hover:text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-paper/35">
+                Correspondence
+              </p>
+              <a
+                href={`mailto:${site.email}`}
+                className="text-sm text-paper/70 transition-colors hover:text-gold"
+              >
+                {site.email}
+              </a>
             </div>
           </div>
 
-          {/* Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Links</h3>
-            <nav className="space-y-2">
-              <FooterLink href="/docs">Documentation</FooterLink>
-              <FooterLink href="/blog">Blog</FooterLink>
-              <FooterLink href="/pricing">Pricing</FooterLink>
-              <FooterLink href="/about">About Us</FooterLink>
-            </nav>
-          </div>
-
-          {/* Legal */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Legal</h3>
-            <nav className="space-y-2">
-              <FooterLink href="/privacy">Privacy Policy</FooterLink>
-              <FooterLink href="/terms">Terms of Service</FooterLink>
-              <FooterLink href="/cookies">Cookie Policy</FooterLink>
-            </nav>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Stay Updated</h3>
-            <p className="text-sm text-muted-foreground">
-              Subscribe to our newsletter for the latest updates.
+          <div className="mt-10 flex flex-col gap-4 border-t border-paper/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-paper/35">
+              © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
-            <div className="flex space-x-2">
-              <Input type="email" placeholder="Your email" />
-              <Button variant="default">
-                <Mail className="mr-2 h-4 w-4" /> Subscribe
-              </Button>
-            </div>
+            <Link
+              href="/"
+              aria-label="Back to top"
+              className="flex h-8 w-8 items-center justify-center border border-paper/15 text-paper/50 transition-colors hover:border-gold/50 hover:text-gold"
+            >
+              <ArrowUp className="h-4 w-4" />
+            </Link>
           </div>
         </div>
-
-        <Separator className="my-8" />
-
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Riaz. All rights reserved.
-          </p>
-          <div className="flex space-x-4">
-            <FooterLink href="/sitemap">Sitemap</FooterLink>
-            <FooterLink href="/status">Status</FooterLink>
-            <FooterLink href="/contact">Contact</FooterLink>
-          </div>
-        </div>
-      </div>
       </Container>
-
     </footer>
-  )
-}
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-    >
-      {children}
-    </Link>
-  )
+  );
 }

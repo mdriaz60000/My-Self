@@ -1,25 +1,23 @@
 import { HeroBanner } from "@/components/shared/Bannar/Bannar";
 import PageProject from "./project/page";
-
-import { ContactPage } from "@/components/shared/Contact/Contact";
-import { BlogPage } from "@/components/shared/Blog/Blog";
-import { SkillsSection } from "@/components/shared/Skills/Skills";
-
-
-
-
-
-
+import SkillsSection from "@/components/shared/Skills/SkillSections";
+import ContactSection from "@/components/shared/Contact/ContactSection";
+import AboutSection from "@/components/shared/about/AboutSection";
+import CurrentlyExploring from "@/components/shared/Skills/CurrentlyExploring";
+import StatsStrip from "@/components/shared/Stats/StatsStrip";
+import TechMarquee from "@/components/shared/Marquee/TechMarquee";
 
 export default function Home() {
   return (
-   <>
-   <HeroBanner />
-   <PageProject />
-   <SkillsSection />
-   <BlogPage/>
-   <ContactPage />
-   
-   </>
+    <>
+      <HeroBanner />
+      <StatsStrip />
+      <AboutSection />
+      <TechMarquee />
+      <SkillsSection />
+      <PageProject />
+      <CurrentlyExploring />
+      <ContactSection />
+    </>
   );
 }
